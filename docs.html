@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Launchpad Wars Docs</title>
+<meta name="description" content="Field manual for Launchpad Wars, one round and one winner" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/apple-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+:root{--void:#0a0714;--panel:#150e28;--paper:#f3eefe;--hot:#ff2d6f;--cyan:#2de2ff;--lime:#8bff4a;--gold:#ffcc33;--dim:#8d81b8;--line:rgba(243,238,254,.14);
+  --px:"Press Start 2P",monospace;--mono:"IBM Plex Mono",ui-monospace,monospace;--pad:clamp(16px,3vw,40px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--void);color:var(--paper);font-family:var(--mono);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px var(--pad);background:rgba(10,7,20,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--px);font-size:11px}
+.brand img{width:26px;height:26px;border:2px solid var(--line)}
+.brand small{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.top nav{display:flex;gap:7px}
+.btn{height:32px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 13px;font-family:var(--px);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;background:var(--panel);color:var(--paper);border:2px solid var(--line)}
+.btn svg{width:13px;height:13px}
+.btn.buy{background:var(--hot);color:#fff;border-color:var(--hot)}
+.btn.crumb{border-color:var(--cyan);color:var(--cyan)}
+.shell{display:grid;grid-template-columns:220px minmax(0,1fr);gap:clamp(20px,4vw,52px);width:min(1020px,100%);margin:0 auto;padding:38px var(--pad) 84px;min-width:0}
+.side{position:sticky;top:78px;align-self:start;display:flex;flex-direction:column;gap:2px}
+.kick{font-family:var(--px);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.side a{font-size:12.5px;padding:6px 11px;color:var(--dim);border-left:2px solid transparent}
+.side a:hover{color:var(--paper)}
+.side a.on{color:var(--paper);border-left-color:var(--cyan);background:rgba(45,226,255,.09)}
+.hero{margin-bottom:26px}
+.hero h1{font-family:var(--px);font-size:clamp(17px,3.2vw,32px);line-height:1.45;color:var(--gold);text-shadow:0 5px 0 #7a1330}
+.hero p{margin-top:16px;font-size:13px;line-height:1.65;color:var(--dim);max-width:58ch;white-space:pre-line}
+.sec{background:var(--panel);padding:clamp(17px,2.6vw,26px);margin-bottom:14px;border:1px solid var(--line)}
+.sec h2{font-family:var(--px);font-size:clamp(12px,1.6vw,16px);line-height:1.5;margin-bottom:14px}
+.sec h2 i{font-style:normal;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:9px}
+.sec p{font-size:13px;line-height:1.75;color:#cdc5e6;max-width:66ch}
+.sec p + p{margin-top:8px}
+.rows{display:grid;margin-top:13px;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:160px 1fr;gap:13px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;line-height:1.6}
+.row dt{font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding-top:4px}
+.row dd{color:#cdc5e6}
+.tree{margin-top:13px;font-size:12.5px;line-height:1.75;white-space:pre;overflow-x:auto;padding:13px 15px;background:#070512;border:1px solid var(--line);color:#cdc5e6}
+.tree b{color:var(--lime);font-weight:600}
+.ca{display:grid;justify-items:center;gap:9px;max-width:100%;padding:16px;margin-top:13px;background:#070512;border:1px solid rgba(139,255,74,.4);cursor:pointer}
+.ca small{font-family:var(--px);font-size:7.5px;color:var(--cyan)}
+.ca b{font-family:var(--px);font-size:clamp(13px,2.4vw,20px);color:var(--paper);white-space:nowrap;max-width:100%}
+.ca.live b{font-family:var(--mono);font-weight:600;font-size:clamp(10px,2.7vw,14px);color:var(--lime)}
+.ca .copy{font:inherit;font-family:var(--px);font-size:7px;padding:6px 11px;background:transparent;color:var(--paper);border:2px dashed rgba(243,238,254,.35);cursor:pointer}
+.ca.live .copy{border-style:solid;border-color:var(--lime);color:var(--lime)}
+.links{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.faq{display:grid;gap:8px;margin-top:11px}
+.faq div{padding:12px 14px;background:#070512;border:1px solid var(--line)}
+.faq b{font-family:var(--px);font-size:10px;line-height:1.5;display:block;margin-bottom:7px;color:var(--gold)}
+.faq span{font-size:12.5px;line-height:1.6;color:#cdc5e6}
+.foot{width:min(1020px,100%);margin:0 auto;padding:0 var(--pad) 44px;font-family:var(--px);font-size:7.5px;letter-spacing:.04em;text-transform:uppercase;color:#4c4470;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:820px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:18px}
+  main{min-width:0}
+  .side{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px;scrollbar-width:none;max-width:100%}
+  .side .kick{display:none}
+  .side a{white-space:nowrap;font-size:12px;padding:5px 11px;border:1px solid var(--line);border-left:1px solid var(--line)}
+  .row{grid-template-columns:1fr;gap:3px}
+  .top nav .btn.buy span{display:none}
+  .brand span{display:none}
+  .ca{width:100%}
+}
+.btn[data-link="x"] svg{width:14px;height:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><img src="assets/favicon.png" alt="" /><span data-name>Launchpad Wars</span><small>docs</small></a>
+  <nav>
+    <a class="btn" href="/"><span>Arcade</span></a>
+    <a class="btn buy" data-link="pons" href="https://www.ponsfamily.com/launchpad"><span>Buy</span><svg><use href="#i-pons"/></svg></a>
+    <a class="btn" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+    <span class="btn crumb">Docs</span>
+  </nav>
+</header>
+
+<div class="shell">
+  <aside class="side">
+    <span class="kick">Field manual</span>
+    <a href="#what" class="on">What is this</a>
+    <a href="#roster">The roster</a>
+    <a href="#fight">The fight</a>
+    <a href="#site">Using the site</a>
+    <a href="#token">Token</a>
+    <a href="#local">Nothing is stored</a>
+    <a href="#faq">FAQ</a>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <h1>Launchpad Wars</h1>
+      <p>Round one, and he never needed a round two
+An arcade cabinet nobody is playing, running the same match forever</p>
+    </div>
+
+    <section id="what" class="sec">
+      <h2><i>01 · Overview</i>What is <span data-name>Launchpad Wars</span></h2>
+      <p>The launchpads spent the year fighting over fees and everybody watched it like a tournament. So somebody built the cabinet. Six fighters on the select screen, one green cat among them, and a machine that runs the bracket on its own with nobody standing at it.</p>
+      <p>You are not playing. The cursor picks for you, the match starts on its own, and the same cat wins the same way every time. Then the counter runs down and it starts again.</p>
+      <div class="rows">
+        <dl class="row"><dt>Cabinet</dt><dd>Attract mode only. There is no coin slot and no controls</dd></dl>
+        <dl class="row"><dt>Our fighter</dt><dd>Pons Cat, small, green, bandaged paws, cap with a feather</dd></dl>
+        <dl class="row"><dt>Match length</dt><dd>Seven hits, one knockdown, about twenty seconds</dd></dl>
+        <dl class="row"><dt>Chain</dt><dd>Robinhood Chain, token through the Pons launchpad</dd></dl>
+      </div>
+    </section>
+
+    <section id="roster" class="sec">
+      <h2><i>02 · Roster</i>Six on the select screen</h2>
+      <div class="tree"><b>fighters</b>
+├── The Dev      <b>hooded</b>   ships at four in the morning, never in daylight
+├── The Sniper   <b>chrome</b>   one red lens, first in every block
+├── The Whale    <b>heavy</b>    does not move, does not need to
+├── The Jeet     <b>fast</b>     already leaving, was never really here
+├── The Rug      <b>rolled</b>   carpet, tassels, two yellow eyes
+└── Pons Cat     <b>ours</b>     takes it from whoever has it and hands it back</div>
+      <p>The cursor walks the whole roster before it settles. It has looked at all five of the others and it has picked the cat every single time it has ever run.</p>
+    </section>
+
+    <section id="fight" class="sec">
+      <h2><i>03 · The match</i>How it goes</h2>
+      <p>Select, versus, round one, fight. The cat lunges seven times, the rug takes all seven, the combo counter climbs and the health bar on the right goes from full to nothing. The clock at the top keeps counting down and never gets anywhere near the end.</p>
+      <div class="rows">
+        <dl class="row"><dt>Opponent</dt><dd>The Rug, every time. It is the only one who agreed to the rematch</dd></dl>
+        <dl class="row"><dt>Result</dt><dd>Perfect. The bar on the left has never moved</dd></dl>
+        <dl class="row"><dt>After</dt><dd>The winner screen holds the contract, then the cabinet resets</dd></dl>
+      </div>
+    </section>
+
+    <section id="site" class="sec">
+      <h2><i>04 · Controls</i>Using the site</h2>
+      <div class="rows">
+        <dl class="row"><dt>Nothing</dt><dd>There is no scrolling and nothing to click in the cabinet. It runs itself</dd></dl>
+        <dl class="row"><dt>Buy, X, Docs</dt><dd>Always in the top corner, on every screen of the loop</dd></dl>
+        <dl class="row"><dt>Sound</dt><dd>Quiet until you tap. Your first click anywhere starts a slow loop</dd></dl>
+        <dl class="row"><dt>The contract</dt><dd>On the winner screen at the end of every match</dd></dl>
+      </div>
+    </section>
+
+    <section id="token" class="sec">
+      <h2><i>05 · Token</i>Token</h2>
+      <p>The token launches on Robinhood Chain through the Pons launchpad. The contract appears on the winner screen and here. Until then both say soon and the copy button says not yet.</p>
+      <div class="ca" id="ca"><small>Contract</small><b id="caVal">soon</b><button class="copy" id="caCopy">Copy</button></div>
+      <div class="links">
+        <a class="btn buy" data-link="pons" href="https://www.ponsfamily.com/launchpad">Buy on Pons<svg><use href="#i-pons"/></svg></a>
+        <a class="btn" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+      </div>
+      <div class="rows">
+        <dl class="row"><dt>Chain</dt><dd>Robinhood Chain, EVM, addresses start with 0x</dd></dl>
+        <dl class="row"><dt>Launchpad</dt><dd>Pons, ponsfamily.com. Buy opens the launchpad, and the token page once the address is in</dd></dl>
+        <dl class="row"><dt>Chart</dt><dd>DexScreener on Robinhood Chain once the token is live</dd></dl>
+      </div>
+    </section>
+
+    <section id="local" class="sec">
+      <h2><i>06 · Privacy</i>Nothing is stored</h2>
+      <p>No backend, no account, no cookies, nothing written to your browser. Six portraits, four poses, one stage and a timer.</p>
+      <div class="rows">
+        <dl class="row"><dt>Music</dt><dd>One CC0 loop from OpenGameArt, plays after your first tap</dd></dl>
+        <dl class="row"><dt>Reduced motion</dt><dd>If your system asks for it the shake and the flash stop, the match still plays</dd></dl>
+        <dl class="row"><dt>Affiliation</dt><dd>None. The fighters are types, not companies. Not a game, not advice</dd></dl>
+      </div>
+    </section>
+
+    <section id="faq" class="sec">
+      <h2><i>07 · FAQ</i>Questions</h2>
+      <div class="faq">
+        <div><b>Can I play it</b><span>No. It is attract mode. Watching is the whole product</span></div>
+        <div><b>Are the fighters real launchpads</b><span>They are types you meet on any chain. Nobody is named and nobody is accused</span></div>
+        <div><b>Does the cat ever lose</b><span>The bar on his side has never moved once</span></div>
+        <div><b>Why the rug</b><span>Everyone else declined. The rug will fight anybody</span></div>
+        <div><b>What happens at launch</b><span>The contract appears on the winner screen, buy starts pointing at the token page, the cabinet keeps running</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="foot"><span data-name>Launchpad Wars</span><span>Robinhood Chain · Pons</span></footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pons" viewBox="0 0 64 64"><path d="M14 8h24c11 0 18 7 18 17s-7 17-18 17h-9v12a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="currentColor"/><path d="M29 20h8c4 0 6.5 2 6.5 5s-2.5 5-6.5 5h-8z" fill="#fff" opacity=".9"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2.1l7.6-8.7L1.5 2h6.7l4.7 6.2L18.9 2zm-1.1 18h1.8L7.3 3.9H5.4L17.8 20z"/></symbol>
+</svg>
+
+<script>
+(function(){
+  var S = window.SITE, CA = (S.CA||"SOON").trim(), HAS_CA = CA !== "SOON" && CA !== "";
+  document.querySelectorAll('[data-name]').forEach(function(e){ e.textContent = S.NAME; });
+  document.title = S.NAME + ' Docs';
+  document.querySelectorAll('[data-link="pons"]').forEach(function(a){ a.href = HAS_CA ? window.PONS_HOME + '/' + CA : window.PONS_HOME; a.target='_blank'; a.rel='noopener'; });
+  document.querySelectorAll('[data-link="x"]').forEach(function(a){ a.href = S.X_URL || 'https://x.com'; a.target='_blank'; a.rel='noopener'; });
+  var caBox = document.getElementById('ca'), caVal = document.getElementById('caVal'), caCopy = document.getElementById('caCopy');
+  caVal.textContent = HAS_CA ? CA : 'soon';
+  if(HAS_CA){ caBox.classList.add('live'); caBox.title = CA; }
+  caBox.addEventListener('click', function(){ var old = caCopy.textContent; if(HAS_CA){ if(navigator.clipboard) navigator.clipboard.writeText(CA); caCopy.textContent = 'Copied'; } else { caCopy.textContent = 'Not yet'; } setTimeout(function(){ caCopy.textContent = old; }, 1200); });
+  var links = [].slice.call(document.querySelectorAll('.side a')), secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function spy(){ var y = window.scrollY + 130, cur = 0; secs.forEach(function(s, i){ if(s && s.offsetTop <= y) cur = i; }); links.forEach(function(a, i){ a.classList.toggle('on', i === cur); }); }
+  addEventListener('scroll', spy, { passive: true }); spy();
+})();
+</script>
+</body>
+</html>
